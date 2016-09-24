@@ -7,31 +7,63 @@
 //
 
 #import "SencondViewController.h"
+#import "ZCScrollView.h"
+@interface SencondViewController () <ZCScrollViewDelegate>
 
-@interface SencondViewController ()
-
+@property (nonatomic,strong) NSArray *controllerTitles;
 @end
 
 @implementation SencondViewController
 
+#pragma mark - - - Life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    ZCScrollView *zcsc = [ZCScrollView topTitleViewWithFrame:self.view.bounds andDelegate:self];
+    zcsc.indicatorHeight = 5;
+    zcsc.currentPage = 1;
+    zcsc.titleAndIndicatorColor = [UIColor orangeColor];
+    zcsc.labelMargin = 20;
+    zcsc.hiddenIndicator = NO;
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    [self.view addSubview:zcsc];
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - - - ZCScrollViewdelegate
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(UIView *)zcScrollView:(ZCScrollView *)zcScrollView viewForPage:(NSInteger)page
+{
+    UIView *view = [[UIView alloc]init];
+    view.backgroundColor = [UIColor redColor];
+    view.backgroundColor = [UIColor colorWithRed:arc4random()%256/255.0 green:arc4random()%256/255.0 blue:arc4random()%256/255.0 alpha:1];
+    
+    return view;
 }
-*/
+
+-(NSArray *)topTitlesInZCScrollView:(ZCScrollView *)zcScrollView
+{
+    return self.controllerTitles;
+}
+
+
+#pragma mark - - - LazyLoad
+
+
+
+-(NSArray *)controllerTitles
+
+{
+    if (!_controllerTitles) {
+        _controllerTitles = @[@"精选", @"头条", @"电影"];
+    }
+    return _controllerTitles;
+}
 
 @end

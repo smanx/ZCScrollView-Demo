@@ -4,7 +4,9 @@
 //
 //  Created by QF on 2016/9/23.
 //  Copyright © 2016年 zc. All rights reserved.
-//
+//  GitHub地址：https://github.com/smanx/ZCScrollView-Demo.git
+
+
 
 #import <UIKit/UIKit.h>
 
@@ -14,10 +16,17 @@
 
 @protocol ZCScrollViewDelegate <NSObject>
 
-- (NSInteger)numberOfPagesInZCScrollView:(ZCScrollView *)zcScrollView;
+@required
 
+//每页显示的内容
 - (UIView *)zcScrollView:(ZCScrollView *)zcScrollView viewForPage:(NSInteger)page;
 
+//标题数组
+- (NSArray *)topTitlesInZCScrollView:(ZCScrollView *)zcScrollView;
+
+@optional
+//自定义标题栏位置
+- (CGRect)topTitleViewFrame;
 
 
 @end
@@ -29,29 +38,29 @@
 //代理方法
 @property (nonatomic,weak) id <ZCScrollViewDelegate> delegate;
 
-/** 静止标题数组 */
-@property (nonatomic, strong) NSArray *staticTitleArr;
-/** 滚动标题数组 */
-@property (nonatomic, strong) NSArray *scrollTitleArr;
-/** 存入所有Label */
-@property (nonatomic, strong) NSMutableArray *allTitleLabel;
 
-#pragma mark - - - 以下属性一定要设置在 -> 标题数组 <- 之后, 否则无效果
-/** 文字以及指示器颜色设置(默认为红色)*/
+//标题文字以及指示器颜色设置(默认为红色)
 @property (nonatomic, strong) UIColor *titleAndIndicatorColor;
-/** 是否隐藏指示器(默认为NO) 指示器的宽度是根据标题内容的宽度变化而变化的, 所以设置这个属性一定要在 -> 标题数组属性之后 */
-@property (nonatomic, assign) BOOL isHiddenIndicator;
-/** 背景指示器样式(默认指示器在标题文字下方, 设置此属性指示器显示在文字后方) */
-@property (nonatomic, assign) BOOL showsTitleBackgroundIndicatorStyle;
 
+// 是否隐藏指示器(默认为NO)
+@property (nonatomic, getter=isHiddenIndicator) BOOL hiddenIndicator;
 
-/** label之间的间距(滚动时TitleLabel之间的间距) */
+//label之间的间距(滚动时TitleLabel之间的间距)
 @property (nonatomic) CGFloat labelMargin;
-/** 指示器的高度 */
+
+
+
+//默认&当前页
+@property (nonatomic) NSInteger currentPage;
+
+//标题栏透明度
+@property (nonatomic) CGFloat topTitlealpha;
+
+//标题栏高度
+@property (nonatomic) CGFloat topTitleHeight;
+
+//指示器的高度
 @property (nonatomic) CGFloat indicatorHeight;
-
-
-
 
 //+方法创建
 - (instancetype)initWithFrame:(CGRect)frame andDelegate:(id)delegate;

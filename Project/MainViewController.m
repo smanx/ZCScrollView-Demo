@@ -7,7 +7,6 @@
 //
 
 #import "MainViewController.h"
-#import "Config.h"
 #import "ZCScrollView.h"
 
 
@@ -27,9 +26,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     ZCScrollView *zcsc = [ZCScrollView topTitleViewWithFrame:self.view.bounds andDelegate:self];
+    
+    //属性如不设置默认以下值
+    //指示器高度
+    zcsc.indicatorHeight = 2;
+    //默认页面
+    zcsc.currentPage = 0;
+    //指示器和title的颜色
+    zcsc.titleAndIndicatorColor = [UIColor redColor];
+    //标题间的宽度
+    zcsc.labelMargin = 25;
+    //是否隐藏指示器
+    zcsc.hiddenIndicator = NO;
+    //标题透明度
+    zcsc.topTitlealpha = 0.7;
+    //标题高度
+    zcsc.topTitleHeight = 40;
  
     self.automaticallyAdjustsScrollViewInsets = NO;
-                          
+    
     [self.view addSubview:zcsc];
 
 }
@@ -39,10 +54,7 @@
     
 }
 
--(NSInteger)numberOfPagesInZCScrollView:(ZCScrollView *)zcScrollView
-{
-    return self.controllerTitles.count;
-}
+#pragma mark - - - ZCScrollViewdelegate
 
 -(UIView *)zcScrollView:(ZCScrollView *)zcScrollView viewForPage:(NSInteger)page
 {
@@ -52,38 +64,17 @@
     
     return view;
 }
+
+-(NSArray *)topTitlesInZCScrollView:(ZCScrollView *)zcScrollView
+{
+    return self.controllerTitles;
+}
+
+
+
 #pragma mark - - - LazyLoad
 
-//- (SGTopTitleView *)topTitleView
-//{
-//    if (!_topTitleView) {
-//        SGTopTitleView *topTitleView = [SGTopTitleView topTitleViewWithFrame:CGRectMake(0, 64, kScreenWidth, 44)];
-//        topTitleView.scrollTitleArr = self.controllerTitles;
-//        topTitleView.titleAndIndicatorColor = [UIColor colorWithRed:arc4random()%256/255 green:arc4random()%256/255 blue:arc4random()%256/255 alpha:1];
-//        topTitleView.delegate = self;
-//        [self.view addSubview:topTitleView];
-//        _topTitleView = topTitleView;
-//    }
-//    return _topTitleView;
-//}
 
-//- (UIScrollView *)mainScrollView
-//{
-//    if (!_mainScrollView) {
-//        UIScrollView *mainScrollView = [[UIScrollView alloc]init];
-//        mainScrollView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-//        mainScrollView.contentSize = CGSizeMake(kScreenWidth * self.controllerTitles.count, 0);
-//        mainScrollView.backgroundColor = [UIColor clearColor];
-//        mainScrollView.pagingEnabled = YES;
-//        mainScrollView.bounces = NO;
-//        mainScrollView.showsHorizontalScrollIndicator = NO;
-//        mainScrollView.delegate = self;
-//        [self.view insertSubview:mainScrollView belowSubview:self.topTitleView];
-//        
-//        _mainScrollView  = mainScrollView;
-//    }
-//    return _mainScrollView;
-//}
 
 -(NSArray *)controllerNames
 {
@@ -97,7 +88,7 @@
 
 {
     if (!_controllerTitles) {
-        _controllerTitles = @[@"精选", @"电视剧", @"电影", @"综艺", @"NBA", @"新闻", @"娱乐", @"音乐", @"网络电影"];
+        _controllerTitles = @[@"电视剧", @"动画" ,@"精选", @"电影", @"综艺", @"直播",@"推荐", @"NBA", @"新闻", @"娱乐", @"音乐", @"网络电影"];
     }
     return _controllerTitles;
 }

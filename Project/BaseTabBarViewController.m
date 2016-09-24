@@ -14,9 +14,6 @@
 
 @property (nonatomic,strong) NSArray *controllerTitles;
 
-@property (nonatomic,strong) NSArray *normalImageNames;
-
-@property (nonatomic,strong) NSArray *selectedImageNames;
 
 
 @end
@@ -45,9 +42,7 @@
     if (!_controllerNames) {
         _controllerNames = @[
                              @"MainViewController",
-                             @"SencondViewController",
-                             @"ThirdViewController",
-                             @"FourthViewController"];
+                             @"SencondViewController"];
     }
     return _controllerNames;
 }
@@ -56,25 +51,9 @@
 
 {
     if (!_controllerTitles) {
-        _controllerTitles = @[@"第一页",@"第二页",@"第三页",@"第四页"];
+        _controllerTitles = @[@"第一页",@"第二页"];
     }
     return _controllerTitles;
-}
-
--(NSArray *)normalImageNames
-{
-    if (!_normalImageNames) {
-        _normalImageNames = @[@"第一页",@"第二页",@"第三页",@"第四页"];
-    }
-    return _normalImageNames;
-}
-
--(NSArray *)selectedImageNames
-{
-    if (!_selectedImageNames) {
-        _selectedImageNames = @[@"第一页",@"第二页",@"第三页",@"第四页"];
-    }
-    return _selectedImageNames;
 }
 
 @end
