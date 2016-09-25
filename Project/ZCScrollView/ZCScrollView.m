@@ -33,7 +33,7 @@
 @property (nonatomic,weak) UIScrollView *topTitleView;
 
 //标题背景
-@property (nonatomic,weak) UIView *topTitlebackgroundView;
+@property (nonatomic,weak) UIVisualEffectView *topTitlebackgroundView;
 
 
 //总页数
@@ -66,11 +66,13 @@
     return _backgroundView;
 }
 
--(UIView *)topTitlebackgroundView
+-(UIVisualEffectView *)topTitlebackgroundView
 {
+    
     if (!_topTitlebackgroundView) {
-        UIView *view = [[UIView alloc]init];
-        
+        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        UIVisualEffectView *view = [[UIVisualEffectView alloc]initWithEffect:blurEffect];
+        view.alpha = 0.95;
         if ([self.delegate respondsToSelector:@selector(topTitleViewFrame)]) {
             view.frame = [self.delegate topTitleViewFrame];
         }

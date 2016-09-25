@@ -56,15 +56,6 @@
 
 #pragma mark - - - ZCScrollViewdelegate
 
--(UIView *)zcScrollView:(ZCScrollView *)zcScrollView viewForPage:(NSInteger)page
-{
-    UIView *view = [[UIView alloc]init];
-    view.backgroundColor = [UIColor redColor];
-    view.backgroundColor = [UIColor colorWithRed:arc4random()%256/255.0 green:arc4random()%256/255.0 blue:arc4random()%256/255.0 alpha:1];
-    
-    return view;
-}
-
 - (UIViewController *)zcScrollViewController:(ZCScrollView *)zcScrollView viewForPage:(NSInteger)page
 {
     UIViewController *vc = [[UIViewController alloc]init];
