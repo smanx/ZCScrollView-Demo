@@ -238,28 +238,28 @@
 
 }
 
-#pragma mark - - - 设置每一页上的view
-- (void)setEveryPageView
-
-{
-
-    for (int i = 0; i < self.totalPage; i++) {
-        UIView *view = [self.delegate zcScrollView:self viewForPage:i];
-        if (!view.frame.size.height) {
-            view.frame = CGRectMake(i * self.bounds.size.width, 0, self.bounds.size.width, self.bounds.size.height);
-        }
-        else
-        {
-            view.frame = CGRectMake(i * self.bounds.size.width, 0, view.bounds.size.width, view.bounds.size.height);
-        }
-        
-        [self.backgroundView addSubview:view];
-        
-    }
-
-    
-}
-#pragma mark - - - 设置每一页上的控制器
+//#pragma mark - - - 设置每一页上的view
+//- (void)setEveryPageView
+//
+//{
+//
+//    for (int i = 0; i < self.totalPage; i++) {
+//        UIView *view = [self.delegate zcScrollView:self viewForPage:i];
+//        if (!view.frame.size.height) {
+//            view.frame = CGRectMake(i * self.bounds.size.width, 0, self.bounds.size.width, self.bounds.size.height);
+//        }
+//        else
+//        {
+//            view.frame = CGRectMake(i * self.bounds.size.width, 0, view.bounds.size.width, view.bounds.size.height);
+//        }
+//        
+//        [self.backgroundView addSubview:view];
+//        
+//    }
+//
+//    
+//}
+//#pragma mark - - - 设置每一页上的控制器
 - (void)setEveryPageViewController
 
 {

@@ -18,8 +18,8 @@
 
 @required
 
-//每页显示的内容
-- (UIView *)zcScrollView:(ZCScrollView *)zcScrollView viewForPage:(NSInteger)page;
+////每页显示的内容
+//- (UIView *)zcScrollView:(ZCScrollView *)zcScrollView viewForPage:(NSInteger)page;
 
 //每页的控制器
 - (UIViewController *)zcScrollViewController:(ZCScrollView *)zcScrollView viewForPage:(NSInteger)page;
