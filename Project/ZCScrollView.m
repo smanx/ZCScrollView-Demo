@@ -215,7 +215,9 @@
 -(void)layoutSubviews
 
 {
-    [self setEveryPageView];
+    //[self setEveryPageView];
+    
+    [self setEveryPageViewController];
     
     [self topTitles];
     
@@ -255,6 +257,27 @@
         
     }
 
+    
+}
+#pragma mark - - - 设置每一页上的控制器
+- (void)setEveryPageViewController
+
+{
+    
+    for (int i = 0; i < self.totalPage; i++) {
+        UIViewController *viewController = [self.delegate zcScrollViewController:self viewForPage:i];
+        if (!viewController.view.frame.size.height) {
+            viewController.view.frame = CGRectMake(i * self.bounds.size.width, 0, self.bounds.size.width, self.bounds.size.height);
+        }
+        else
+        {
+            viewController.view.frame = CGRectMake(i * self.bounds.size.width, 0, viewController.view.bounds.size.width, viewController.view.bounds.size.height);
+        }
+        
+        [self.backgroundView addSubview:viewController.view];
+        
+    }
+    
     
 }
 

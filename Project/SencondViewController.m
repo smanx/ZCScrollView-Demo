@@ -47,6 +47,11 @@
     return view;
 }
 
+- (UIViewController *)zcScrollViewController:(ZCScrollView *)zcScrollView viewForPage:(NSInteger)page
+{
+    return nil;
+}
+
 -(NSArray *)topTitlesInZCScrollView:(ZCScrollView *)zcScrollView
 {
     return self.controllerTitles;
