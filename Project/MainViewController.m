@@ -39,7 +39,7 @@
     //是否隐藏指示器
     zcsc.hiddenIndicator = NO;
     //标题透明度
-    zcsc.topTitlealpha = 0.7;
+    zcsc.topTitleAlpha = 0.7;
     //标题高度
     zcsc.topTitleHeight = 40;
  

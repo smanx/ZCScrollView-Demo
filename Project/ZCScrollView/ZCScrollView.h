@@ -18,9 +18,6 @@
 
 @required
 
-////每页显示的内容
-//- (UIView *)zcScrollView:(ZCScrollView *)zcScrollView viewForPage:(NSInteger)page;
-
 //每页的控制器
 - (UIViewController *)zcScrollViewController:(ZCScrollView *)zcScrollView viewForPage:(NSInteger)page;
 
@@ -57,7 +54,7 @@
 @property (nonatomic) NSInteger currentPage;
 
 //标题栏透明度
-@property (nonatomic) CGFloat topTitlealpha;
+@property (nonatomic) CGFloat topTitleAlpha;
 
 //标题栏高度
 @property (nonatomic) CGFloat topTitleHeight;

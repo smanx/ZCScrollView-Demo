@@ -76,7 +76,7 @@
         }
         else view.frame = CGRectMake(0, 60, self.bounds.size.width, _topTitleHeight);
         
-        view.backgroundColor = [UIColor colorWithWhite:1 alpha:_topTitlealpha];
+        view.backgroundColor = [UIColor colorWithWhite:1 alpha:_topTitleAlpha];
         [self addSubview:view];
         _topTitlebackgroundView = view;
     }
@@ -233,32 +233,11 @@
     _titleAndIndicatorColor = [UIColor redColor];
     _hiddenIndicator = NO;;
     _labelMargin = 25;
-    _topTitlealpha = 0.7;
+    _topTitleAlpha = 0.7;
     _topTitleHeight = 40;
 
 }
 
-//#pragma mark - - - 设置每一页上的view
-//- (void)setEveryPageView
-//
-//{
-//
-//    for (int i = 0; i < self.totalPage; i++) {
-//        UIView *view = [self.delegate zcScrollView:self viewForPage:i];
-//        if (!view.frame.size.height) {
-//            view.frame = CGRectMake(i * self.bounds.size.width, 0, self.bounds.size.width, self.bounds.size.height);
-//        }
-//        else
-//        {
-//            view.frame = CGRectMake(i * self.bounds.size.width, 0, view.bounds.size.width, view.bounds.size.height);
-//        }
-//        
-//        [self.backgroundView addSubview:view];
-//        
-//    }
-//
-//    
-//}
 //#pragma mark - - - 设置每一页上的控制器
 - (void)setEveryPageViewController
 
