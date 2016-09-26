@@ -10,9 +10,9 @@
 ```
 #import "ZCScrollView.h"
 
-//+方法创建
-- (instancetype)initWithFrame:(CGRect)frame andDelegate:(id)delegate;
 //-方法创建
+- (instancetype)initWithFrame:(CGRect)frame andDelegate:(id)delegate;
+//+方法创建
 + (instancetype)topTitleViewWithFrame:(CGRect)frame andDelegate:(id)delegate;
 
 ```
