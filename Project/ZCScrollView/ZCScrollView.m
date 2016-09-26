@@ -8,6 +8,7 @@
 
 
 #import "ZCScrollView.h"
+
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 
@@ -32,12 +33,13 @@
 //标题ScrollView
 @property (nonatomic,weak) UIScrollView *topTitleView;
 
-//标题背景
-@property (nonatomic,weak) UIVisualEffectView *topTitlebackgroundView;
 
 
 //总页数
 @property (nonatomic)NSInteger totalPage;
+
+//水平偏移量
+@property (nonatomic)CGFloat currentOffsetX;
 
 
 @end
@@ -72,12 +74,12 @@
     if (!_topTitlebackgroundView) {
         UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
         UIVisualEffectView *view = [[UIVisualEffectView alloc]initWithEffect:blurEffect];
-        view.alpha = 0.95;
+        view.alpha = 0.9;
         if ([self.delegate respondsToSelector:@selector(topTitleViewFrame)]) {
             view.frame = [self.delegate topTitleViewFrame];
         }
         else view.frame = CGRectMake(0, 60, self.bounds.size.width, _topTitleHeight);
-        
+        view.alpha = 0.95;
         view.backgroundColor = [UIColor colorWithWhite:1 alpha:_topTitleAlpha];
         [self addSubview:view];
         _topTitlebackgroundView = view;
@@ -217,9 +219,7 @@
 -(void)layoutSubviews
 
 {
-    //[self setEveryPageView];
-    
-    [self setEveryPageViewController];
+    [self setEveryPageView];
     
     [self topTitles];
     
@@ -237,30 +237,32 @@
     _labelMargin = 25;
     _topTitleAlpha = 0.7;
     _topTitleHeight = 40;
+    _pageChangeAnimate = YES;
 
 }
 
-//#pragma mark - - - 设置每一页上的控制器
-- (void)setEveryPageViewController
+#pragma mark - - - 设置每一页上的view
+- (void)setEveryPageView
 
 {
     
     for (int i = 0; i < self.totalPage; i++) {
-        UIViewController *viewController = [self.delegate zcScrollViewController:self viewForPage:i];
-        if (!viewController.view.frame.size.height) {
-            viewController.view.frame = CGRectMake(i * self.bounds.size.width, 0, self.bounds.size.width, self.bounds.size.height);
+        UIView *view = [self.delegate zcScrollView:self viewForPage:i];
+        if (!view.frame.size.height) {
+            view.frame = CGRectMake(i * self.bounds.size.width, 0, self.bounds.size.width, self.bounds.size.height);
         }
         else
         {
-            viewController.view.frame = CGRectMake(i * self.bounds.size.width, 0, viewController.view.bounds.size.width, viewController.view.bounds.size.height);
+            view.frame = CGRectMake(i * self.bounds.size.width, 0, view.bounds.size.width, view.bounds.size.height);
         }
         
-        [self.backgroundView addSubview:viewController.view];
+        [self.backgroundView addSubview:view];
         
     }
     
     
 }
+
 
 //选中标题变色
 - (void)currentTitleLabelChangeColor
@@ -308,10 +310,21 @@
     CGRect rect = self.indicatorView.frame;
     rect.origin.x = _currentTitleLabel.frame.origin.x;
     rect.size.width = _currentTitleLabel.frame.size.width;
-    [UIView animateWithDuration:0.2 animations:^{
-        self.indicatorView.frame = rect;
-    }];
-    self.backgroundView.contentOffset = CGPointMake((_currentTitleLabel.tag - 100) * self.bounds.size.width, 0);
+    if (_pageChangeAnimate) {
+        [UIView animateWithDuration:0.2 animations:^{
+            self.indicatorView.frame = rect;
+            self.backgroundView.contentOffset = CGPointMake((_currentTitleLabel.tag - 100) * self.bounds.size.width, 0);
+        }];
+    }
+    else
+    {
+        [UIView animateWithDuration:0.2 animations:^{
+            self.indicatorView.frame = rect;
+            
+        }];
+        self.backgroundView.contentOffset = CGPointMake((_currentTitleLabel.tag - 100) * self.bounds.size.width, 0);
+    }
+    
     [self topTitleLabelToCenter];
 }
 
@@ -329,8 +342,15 @@
         self.indicatorView.frame = rect;
     }];
     [self topTitleLabelToCenter];
+    [self.delegate scrollViewDidScroll:_backgroundView];
 
-    
+    if (_backgroundView.contentOffset.x - _currentOffsetX) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            self.topTitlebackgroundView.hidden = NO;
+        });
+        
+    }
+    _currentOffsetX = self.backgroundView.contentOffset.x;
 }
 
 
