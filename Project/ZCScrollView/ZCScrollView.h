@@ -28,7 +28,7 @@
 
 
 //左右滑动时触发
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView;
+- (void)zcScrollViewDidScroll:(ZCScrollView *)zcScrollView;
 
 //自定义标题栏位置
 - (CGRect)topTitleViewFrame;
@@ -84,6 +84,8 @@
 + (instancetype)topTitleViewWithFrame:(CGRect)frame andDelegate:(id)delegate;
 
 
+//内容ScrollView
+@property (nonatomic,weak) UIScrollView *backgroundView;
 
 
 @end

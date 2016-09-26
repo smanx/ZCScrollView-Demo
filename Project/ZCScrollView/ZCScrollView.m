@@ -27,8 +27,7 @@
 //标题宽度是否超过屏幕宽度
 @property (nonatomic, assign,getter=isLongerThanScreenWidth) BOOL longerThanScreenWidth;
 
-//内容ScrollView
-@property (nonatomic,weak) UIScrollView *backgroundView;
+
 
 //标题ScrollView
 @property (nonatomic,weak) UIScrollView *topTitleView;
@@ -62,8 +61,8 @@
         sc.delegate = self;
         sc.showsHorizontalScrollIndicator = NO;
         [self addSubview:sc];
-        
         _backgroundView = sc;
+        
     }
     return _backgroundView;
 }
@@ -342,7 +341,7 @@
         self.indicatorView.frame = rect;
     }];
     [self topTitleLabelToCenter];
-    [self.delegate scrollViewDidScroll:_backgroundView];
+    [self.delegate zcScrollViewDidScroll:self];
 
     if (_backgroundView.contentOffset.x - _currentOffsetX) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

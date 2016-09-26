@@ -56,13 +56,11 @@
 
 #pragma mark - - - ZCScrollViewdelegate
 
-- (UIViewController *)zcScrollViewController:(ZCScrollView *)zcScrollView viewForPage:(NSInteger)page
+-(UIView *)zcScrollView:(ZCScrollView *)zcScrollView viewForPage:(NSInteger)page
 {
-    UIViewController *vc = [[UIViewController alloc]init];
-    vc.view.backgroundColor = [UIColor redColor];
-    vc.view.backgroundColor = [UIColor colorWithRed:arc4random()%256/255.0 green:arc4random()%256/255.0 blue:arc4random()%256/255.0 alpha:1];
-    
-    return vc;
+    UIView *view = [[UIView alloc]initWithFrame:self.view.bounds];
+    view.backgroundColor = [UIColor colorWithRed:arc4random()%256/255.0 green:arc4random()%256/255.0 blue:arc4random()%256/255.0 alpha:1];
+    return view;
 }
 
 -(NSArray *)topTitlesInZCScrollView:(ZCScrollView *)zcScrollView
@@ -70,7 +68,10 @@
     return self.controllerTitles;
 }
 
-
+-(void)zcScrollViewDidScroll:(ZCScrollView *)zcScrollView
+{
+    NSLog(@"正在横向滚动%lg",zcScrollView.backgroundView.contentOffset.x);
+}
 
 #pragma mark - - - LazyLoad
 
