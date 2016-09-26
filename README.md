@@ -44,24 +44,22 @@
 // 是否隐藏指示器(默认为NO)
 @property (nonatomic, getter=isHiddenIndicator) BOOL hiddenIndicator;
 
-// 点标题是切换界面时候开启动画(默认为YES)
+// 点标题切换界面时是否开启动画(默认为YES)
 @property (nonatomic, getter=isPageChangeAnimate) BOOL pageChangeAnimate;
 
-//label之间的间距(滚动时TitleLabel之间的间距)
+//标题间距(默认25)
 @property (nonatomic) CGFloat labelMargin;
 
-//默认&当前页
+//默认&当前页(默认0)
 @property (nonatomic) NSInteger currentPage;
 
-//标题栏透明度
+//标题栏透明度(默认0.7)
 @property (nonatomic) CGFloat topTitleAlpha;
 
-//标题栏高度
+//标题栏高度 (默认40)
 @property (nonatomic) CGFloat topTitleHeight;
 
-//指示器的高度
+//指示器的高度 (默认2)
 @property (nonatomic) CGFloat indicatorHeight;
 
-//标题背景
-@property (nonatomic,weak) UIVisualEffectView *topTitlebackgroundView;
 ```
