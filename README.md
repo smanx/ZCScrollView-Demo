@@ -6,9 +6,14 @@
 ![image](http://www.z4a.net/images/2016/09/24/f10b119a215b491d.gif)
 
 ##使用方法
-###1.导入头文件 
+###1.导入头文件及创建方法
 ```
 #import "ZCScrollView.h"
+
+//+方法创建
+- (instancetype)initWithFrame:(CGRect)frame andDelegate:(id)delegate;
+//-方法创建
++ (instancetype)topTitleViewWithFrame:(CGRect)frame andDelegate:(id)delegate;
 
 ```
 ###2.准守协议 ZCScrollViewDelegate
@@ -16,14 +21,17 @@
 ###3.实现代理方法
 ```
 @required
-
-//每页的控制器
-- (UIViewController *)zcScrollViewController:(ZCScrollView *)zcScrollView viewForPage:(NSInteger)page;
-
-//标题字符串数组
+//标题数组
 - (NSArray *)topTitlesInZCScrollView:(ZCScrollView *)zcScrollView;
 
+//每页显示的内容
+- (UIView *)zcScrollView:(ZCScrollView *)zcScrollView viewForPage:(NSInteger)page;
+
+
 @optional
+//左右滑动时触发
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView;
+
 //自定义标题栏位置
 - (CGRect)topTitleViewFrame;
 ```
@@ -36,18 +44,24 @@
 // 是否隐藏指示器(默认为NO)
 @property (nonatomic, getter=isHiddenIndicator) BOOL hiddenIndicator;
 
-//滚动时TitleLabel之间距离(默认25)
+// 点标题是切换界面时候开启动画(默认为YES)
+@property (nonatomic, getter=isPageChangeAnimate) BOOL pageChangeAnimate;
+
+//label之间的间距(滚动时TitleLabel之间的间距)
 @property (nonatomic) CGFloat labelMargin;
 
-//默认&当前页(进入界面默认第0页)
+//默认&当前页
 @property (nonatomic) NSInteger currentPage;
 
-//标题栏透明度(默认0.7)
+//标题栏透明度
 @property (nonatomic) CGFloat topTitleAlpha;
 
-//标题栏高度(默认40)
+//标题栏高度
 @property (nonatomic) CGFloat topTitleHeight;
 
-//指示器的高度(默认2)
+//指示器的高度
 @property (nonatomic) CGFloat indicatorHeight;
+
+//标题背景
+@property (nonatomic,weak) UIVisualEffectView *topTitlebackgroundView;
 ```
