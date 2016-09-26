@@ -53,7 +53,7 @@
 // 是否隐藏指示器(默认为NO)
 @property (nonatomic, getter=isHiddenIndicator) BOOL hiddenIndicator;
 
-// 是否隐藏指示器(默认为NO)
+// 点标题是切换界面时候开启动画(默认为YES)
 @property (nonatomic, getter=isPageChangeAnimate) BOOL pageChangeAnimate;
 
 //label之间的间距(滚动时TitleLabel之间的间距)
